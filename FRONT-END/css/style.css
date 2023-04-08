@@ -4,7 +4,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 9px;
+  padding: 8px 3%;
 }
 
 #header-index {
@@ -56,7 +56,7 @@ header {
 
 /* INDEX */
 main {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 
@@ -71,7 +71,7 @@ main {
 #bg-layer {
   background-color: rgba(130, 152, 150, 0.8);
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +85,7 @@ main {
 
 #banner-index h1 {
   font-size: 3rem;
-  color: #419ED7;
+  color: #2f87bd;
   max-width: 700px;
   text-align: center;
 }
@@ -107,23 +107,22 @@ main {
 
 /* HOME */
 
-#main-home {
-  padding: 15px 20px;
+#main-home, #main-nova-vacina {
+  padding: 15px 4%;
   background: #ADD5D0;
 }
 
 #search-container {
   display: flex;
   background-color: #fff;
-  margin-bottom: 20px;
+  margin: 15px auto 45px;
   align-content: center;
 }
 
 #input-search {
   width: 100%;
-  margin: 4px 8px;
+  margin: 6px 8px 6px 4px;
   border: none;
-  height: 26px;
   font-size: 1rem;
   outline: 0;
   font-family: "Averia Libre", "sans-serif";
@@ -136,7 +135,7 @@ main {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 6px 8px;
   transition: .3s;
 }
 
@@ -148,3 +147,92 @@ main {
   width: 20px;
   height: 20px;
 }
+
+#home-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 15px 10px 15px;
+  width: 370px;
+  height: 370px;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-item:hover {
+  background-color: #e8e5e5;
+}
+
+.card-title {
+  font-size: 2rem;
+  color: #3F92C5;
+  text-align: center;
+}
+
+.card-dose-info-container {
+  background-color: #3F92C5;
+  margin: 15px auto 10px;
+  width: 100px;
+  text-align: center;
+  color: #fff;
+}
+
+.card-date {
+  text-align: center;
+  color: #8B8B8B;
+  margin-bottom: 15px;
+}
+
+.card-img {
+  max-width: 100%;
+}
+
+.card-next-dose-info {
+  margin-top: 20px;
+  align-self: flex-end;
+  color: #FD7979
+}
+
+#home-btn-container {
+  display: block;
+  margin: 50px auto 0 auto;
+  text-align: center;
+  color: #fff;
+  background-color: #37BD6D;
+  width: 130px;
+  padding: 7px 10px;
+  transition: .3s;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#home-btn-container:hover {
+  background-color: #FFF;
+  color: #37BD6D;
+}
+
+/*NOVA VACINA*/
+#form-nova-vacina {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+/* MEDIA QUERIES */
+/* @media screen and (max-width: 1421px) {
+  #home-card-container {
+    justify-content: flex-start;
+    gap: 8%;
+    
+  }
+
+  .card-item {
+    max-width: 400px;
+    height: auto;
+  }
+} */
