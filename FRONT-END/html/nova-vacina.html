@@ -30,41 +30,67 @@
   <main id="main-nova-vacina">
     <section class="nova-vacina-container">
       <form id="form-nova-vacina">
-        <label for="input-data-vacina">Data de vacinação</label>
-        <input type="date" id="input-data-vacina" name="data-vacina">
+        <div class="form-row">
+          <label for="input-data-vacina" class="label-first-lvl">Data de vacinação</label>
+          <input type="date" id="input-data-vacina" class="input-first-lvl input-first-lvl-field" name="data-vacina">
+        </div>
+        
+        <div class="form-row">
+          <label for="input-nome-vacina" class="label-first-lvl">Vacina</label>
+          <input type="text" id="input-nome-vacina" class="input-first-lvl input-first-lvl-field" name="nome-vacina">
+        </div>
+        
+        <div class="form-row">
+          <label for="input-dose-vacina" class="label-first-lvl">Dose</label>
+          <div>
+            <label>  
+              <input type="radio" name="dose-vacina" class="input-dose-vacina" value="1">
+              1a. dose
+            </label>
+            <label>  
+              <input type="radio" name="dose-vacina" class="input-dose-vacina" value="2">
+              2a. dose
+            </label>
+            <label>  
+              <input type="radio" name="dose-vacina" class="input-dose-vacina" value="3">
+              3a. dose
+            </label>
+            <label>  
+              <input type="radio" name="dose-vacina" class="input-dose-vacina" value="4">
+              Reforço
+            </label>
+            <label>  
+              <input type="radio" name="dose-vacina" class="input-dose-vacina" value="5">
+              Dose única
+            </label>
+          </div>
+        </div>
+        
 
-        <label for="input-nome-vacina">Vacina</label>
-        <input type="text" id="input-nome-vacina" name="nome-vacina">
+        <div class="form-row form-comprovante">
+          <label for="img-vacina" class="label-first-lvl">Comprovante da vacina</label>
+          <div class="comprovante-container">
+            <label for="img-vacina" class="btn-input">
+              Selecionar imagem...
+              <input type="file" id="img-vacina" class="input-first-lvl" name="img-vacina">
+            </label>
+            <div class="img-comprovante">
+              <img src="../img/vaccine-bg.jpg" alt="Comprovante" class="">
+            </div>
+          </div>
+          
+          
+        </div>
 
-        <label for="input-dose-vacina" >Dose</label>
-        <label>  
-          <input type="radio" name="dose-vacina" class="input-dose-vacina" value="1">
-          1a. dose
-        </label>
-        <label>  
-          <input type="radio" name="dose-vacina" class="input-dose-vacina" value="2">
-          2a. dose
-        </label>
-        <label>  
-          <input type="radio" name="dose-vacina" class="input-dose-vacina" value="3">
-          3a. dose
-        </label>
-        <label>  
-          <input type="radio" name="dose-vacina" class="input-dose-vacina" value="4">
-          Reforço
-        </label>
-        <label>  
-          <input type="radio" name="dose-vacina" class="input-dose-vacina" value="5">
-          Dose única
-        </label>
-
-        <label for="img-vacina">Comprovante da vacina</label>
-        <input type="file" id="img-vacina" name="img-vacina">
-
-        <label for="input-next-vacina">Próxima vacinação</label>
-        <input type="date" id="input-next-vacina" name="next-vacina">
-
-        <button type="submit">Cadastrar</button>
+        
+        
+        <div class="form-row">
+          <label for="input-next-vacina" class="label-first-lvl">Próxima vacinação</label>
+          <input type="date" id="input-next-vacina" class="input-first-lvl input-first-lvl-field" name="next-vacina">
+        </div>
+        
+        <button type="submit" id="btn-form-vacina">Cadastrar</button>
+        
       </form>
       
       
