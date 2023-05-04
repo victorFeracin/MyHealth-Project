@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>MyHealth - Criar Conta</title>
+</head>
+<body>
+  <!--HEADER-->
+  <header>
+    <nav id="header-logo">
+      <a href="index.html">
+        <img src="../img/vaccineicon.png" alt="MyHealth">
+        <span>MyHealth</span>
+      </a>
+    </nav>
+  </header>
+  <!--HEADER END-->
+
+  <main id="main-criar-conta">
+    <section class="criar-conta-container">
+      <form id="form-criar-conta">
+
+        <div class="form-row">
+          <label for="input-nome-completo" class="label-first-lvl">Nome completo</label>
+          <input type="text" id="input-nome-completo" class="input-first-lvl input-first-lvl-field" name="nome-completo">
+        </div>
+        
+        <div class="form-row">
+          <label for="input-sexo" class="label-first-lvl">Sexo</label>
+          <div>
+            <label>  
+              <input type="radio" name="user-sexo" class="input-sexo" value="1">
+              Masculino
+            </label>
+            <label>  
+              <input type="radio" name="user-sexo" class="input-sexo" value="2">
+              Feminino
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <label for="input-data-nascimento" class="label-first-lvl">Data nascimento</label>
+          <input type="date" id="input-data-nascimento" class="input-first-lvl input-first-lvl-field" name="data-nascimento">
+        </div>
+
+        <div class="form-row">
+          <label for="input-email" class="label-first-lvl">Email</label>
+          <input type="email" id="input-email" class="input-first-lvl input-first-lvl-field" name="email">
+        </div>
+
+        <div class="form-row">
+          <label for="input-senha" class="label-first-lvl">Senha</label>
+          <input type="password" id="input-senha" class="input-first-lvl input-first-lvl-field" name="senha">
+        </div>
+
+        <div class="form-row">
+          <label for="input-repetir-senha" class="label-first-lvl">Repetir senha</label>
+          <input type="password" id="input-repetir-senha" class="input-first-lvl input-first-lvl-field" name="repetir-senha">
+        </div>
+        
+        <button type="submit" id="btn-form-vacina">Cadastrar</button>
+        
+      </form>   
+    </section>
+  </main>
+
+</body>
+</html>
