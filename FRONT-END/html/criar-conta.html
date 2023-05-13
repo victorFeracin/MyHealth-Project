@@ -25,50 +25,52 @@
     <section class="criar-conta-container">
       <form id="form-criar-conta">
 
-        <div class="form-row">
-          <label for="input-nome-completo" class="label-first-lvl">Nome completo</label>
-          <input type="text" id="input-nome-completo" class="input-first-lvl input-first-lvl-field" name="nome-completo">
+        <div class="form-row-criar">
+          <label for="input-nome-completo" class="label-first-lvl-criar">Nome completo</label>
+          <input type="text" id="input-nome-completo" class="input-first-lvl-criar input-first-lvl-field" name="nome-completo" required>
         </div>
         
-        <div class="form-row">
-          <label for="input-sexo" class="label-first-lvl">Sexo</label>
+        <div class="form-row-criar">
+          <label for="input-sexo" class="label-first-lvl-criar">Sexo</label>
           <div>
             <label>  
-              <input type="radio" name="user-sexo" class="input-sexo" value="1">
+              <input type="radio" name="user-sexo" id="input-sexo-masc" value="Masculino" checked>
               Masculino
             </label>
             <label>  
-              <input type="radio" name="user-sexo" class="input-sexo" value="2">
+              <input type="radio" name="user-sexo" id="input-sexo-fem" value="Feminino">
               Feminino
             </label>
           </div>
         </div>
         
-        <div class="form-row">
-          <label for="input-data-nascimento" class="label-first-lvl">Data nascimento</label>
-          <input type="date" id="input-data-nascimento" class="input-first-lvl input-first-lvl-field" name="data-nascimento">
+        <div class="form-row-criar">
+          <label for="input-data-nascimento" class="label-first-lvl-criar">Data nascimento</label>
+          <input type="date" id="input-data-nascimento" class="input-first-lvl-criar input-first-lvl-field" name="data-nascimento" required>
         </div>
 
-        <div class="form-row">
-          <label for="input-email" class="label-first-lvl">Email</label>
-          <input type="email" id="input-email" class="input-first-lvl input-first-lvl-field" name="email">
+        <div class="form-row-criar">
+          <label for="input-email" class="label-first-lvl-criar">Email</label>
+          <input type="email" id="input-email" class="input-first-lvl-criar input-first-lvl-field" name="email" required>
         </div>
 
-        <div class="form-row">
-          <label for="input-senha" class="label-first-lvl">Senha</label>
-          <input type="password" id="input-senha" class="input-first-lvl input-first-lvl-field" name="senha">
+        <div class="form-row-criar">
+          <label for="input-senha" class="label-first-lvl-criar">Senha</label>
+          <input type="password" id="input-senha" class="input-first-lvl-criar input-first-lvl-field" name="senha" required>
         </div>
 
-        <div class="form-row">
-          <label for="input-repetir-senha" class="label-first-lvl">Repetir senha</label>
-          <input type="password" id="input-repetir-senha" class="input-first-lvl input-first-lvl-field" name="repetir-senha">
+        <div class="form-row-criar">
+          <label for="input-repetir-senha" class="label-first-lvl-criar">Repetir senha</label>
+          <input type="password" id="input-repetir-senha" class="input-first-lvl-criar input-first-lvl-field" name="repetir-senha" required>
         </div>
         
-        <button type="submit" id="btn-form-vacina">Cadastrar</button>
+        <button type="submit" id="btn-form-criar">Cadastrar</button>
         
       </form>   
     </section>
   </main>
-
+  <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+  <script type="module" src="../js/services.js"></script>
+  <script type="module" src="../js/criar-conta.js"></script>
 </body>
 </html>
