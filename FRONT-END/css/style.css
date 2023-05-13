@@ -394,7 +394,7 @@ input[type='file'] {
 }
 
 /* ENTRAR */
-.entrar-container {
+.entrar-container, .redefinir-container {
   display: flex;
   justify-content: center;
 }
@@ -456,6 +456,56 @@ input[type='file'] {
 
 #btn-esqueci-senha:hover {
   text-decoration: underline;
+}
+
+/* RECUPERAR SENHA */
+.redefinir-container {
+  margin-top: 200px;
+}
+
+.form-redefinir {
+  display: flex;
+  align-items: center;
+}
+
+.form-row-redefinir {
+  display: flex;
+  gap: 20px;
+  font-family: "Averia Libre", "sans-serif";
+}
+
+.form-row-redefinir label {
+  color: #FFF;
+  font-size: 1.5rem;
+}
+
+.input-first-lvl-redefinir {
+  min-width: 400px;
+  font-family: "Averia Libre", "sans-serif";
+  color: #2f87bd;
+}
+
+#btn-form-redefinir-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#btn-form-redefinir {
+  background-color: #37BD6D;
+  color: #fff;
+  border: none;
+  width: 160px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  padding: 7px 10px;
+  cursor: pointer;
+  margin: 5px auto 80px auto;
+  transition: .3s;
+}
+
+#btn-form-redefinir:hover {
+  background-color: #FFF;
+  color: #37BD6D;
 }
 
 /* #form-nova-vacina-labels, #form-nova-vacina-inputs {
