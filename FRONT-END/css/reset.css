@@ -39,3 +39,12 @@ h1, h2, h3, h4, h5, h6, p, a, ul, span, label, button {
 input {
 	font-size: 1rem;
 }
+
+.erro {
+	color: red;
+	font-size: 0.8rem;
+	font-weight: 600;
+	margin-top: 0.2rem;
+	display: block;
+	width: 100%;
+}

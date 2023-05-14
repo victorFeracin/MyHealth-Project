@@ -11,28 +11,28 @@ let getSexo = '';
 const Form = document.getElementById('form-criar-conta');
 
 const constraints = {
-  fullName: {
+  "nome-completo": {
     presence: { allowEmpty: false, message: 'Campo obrigatório' },
     length: {
       minimum: 2,
       message: "Deve ter no mínimo 2 caracteres",
     },
   },
-  dataNasc: {
+  "data-nascimento": {
     presence: { allowEmpty: false, message: 'Campo obrigatório' },
   },
-  email: {
+  "email": {
     presence: { allowEmpty: false, message: 'Campo obrigatório' },
     email: { message: 'Email inválido' },
   },
-  password: {
+  "senha": {
     presence: { allowEmpty: false, message: 'Campo obrigatório' },
     length: {
       minimum: 6,
       message: "Deve ter no mínimo 6 caracteres",
     },
   },
-  confirmPassword: {
+  "repetir-senha": {
     presence: { allowEmpty: false, message: 'Campo obrigatório' },
     equality: {
       attribute: 'password',
@@ -43,21 +43,35 @@ const constraints = {
 
 const validateForm = () => {
   const fields = {
-    fullName: getFullName.value,
-    dataNasc: getDataNasc.value,
-    email: getEmail.value,
-    password: getPassword.value,
-    confirmPassword: getPasswordConfirm.value,
+    "nome-completo": getFullName.value,
+    "data-nascimento": getDataNasc.value,
+    "email": getEmail.value,
+    "senha": getPassword.value,
+    "repetir-senha": getPasswordConfirm.value,
   }
   
   let errors = validate(fields, constraints);
 
   if (errors) {
-    errors = Object.values(errors);
-    errors.forEach((error) => {
-      const errorMessage = error;
-      console.log(errorMessage);
-    });
+    
+    for (const id in errors) {
+      const input = Form.querySelector(`[name="${id}"]`);
+      Toastify({
+        text: (errors[id][0]).replace(`${input.previousElementSibling.innerText} `, ""),
+        duration: 3000,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #c60b0b, #cd3544)",
+          fontFamily: ("Averia Libre", "sans-serif"),
+        },
+
+      }).showToast();
+    }
+
+    
     return false;
   }
   return true;

@@ -435,6 +435,7 @@ input[type='file'] {
   cursor: pointer;
   margin: 40px auto 0 auto;
   transition: .3s;
+  font-size: 1rem;
 }
 
 #btn-form-criar:hover {

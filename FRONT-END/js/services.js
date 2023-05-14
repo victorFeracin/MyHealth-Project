@@ -1,6 +1,6 @@
 import { app } from "./firebase-config.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js';
+import { getFirestore, collection, getDocs, addDoc } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js';
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -9,7 +9,23 @@ const db = getFirestore(app);
 export const createUser = async (email, password, name, sexo, dataNasc) => {
   try {
      const userCreate = await createUserWithEmailAndPassword(auth, email, password);
-     console.log(`${email}, ${password}, ${name}, ${sexo}, ${dataNasc}`);
+     if (userCreate.user !== null) {
+      const userDoc = {
+        user_birth: dataNasc,
+        user_email: email,
+        user_name: name,
+        user_sex: sexo,
+        user_uid: userCreate.user.uid,
+        user_vaccines: {
+          vac_date: null,
+          vac_dose: '',
+          vac_id: '',
+          vac_name: '',
+          vac_url_img: '',
+        }
+      };
+      await addDoc(collection(db, 'users'), userDoc);
+     }
      return userCreate.user;
   } catch (error) {
     console.log(`Error ${error.code}: ${error.message}`);
