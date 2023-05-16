@@ -592,3 +592,82 @@ input[type='file'] {
   width: 80px;
   height: 80px;
 }
+
+/*MEDIA*/
+@media screen and (max-width: 440px) {
+  header {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 1360px) {
+  .input-first-lvl {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1295px) {
+  #home-card-container {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1215px) {
+  #remove-vacina-popup-content {
+    width: 80%;
+    height: 350px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1115px) {
+  .form-row {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .label-first-lvl {
+    text-align: left;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+  .btn-input {
+    height: auto;
+  }
+  .nova-vacina-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-row-entrar {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .input-first-lvl {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .input-first-lvl-redefinir {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .btn-input {
+    width: 100px;
+  }
+}

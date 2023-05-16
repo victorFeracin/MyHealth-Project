@@ -1,4 +1,4 @@
-import { createVaccine } from './services.js';
+import { logout, createVaccine } from './services.js';
 
 const getDataVacina = document.getElementById('input-data-vacina');
 const getName = document.getElementById('input-nome-vacina');
@@ -7,9 +7,15 @@ const getImgUrl = document.getElementById('img-vacina');
 const getNextVacina = document.getElementById('input-next-vacina');
 let getDose = "";
 
+const btnLogout = document.getElementById('btn-logout');
 const getImgContainer = document.querySelector('.img-comprovante');
 
 const Form = document.getElementById('form-nova-vacina');
+
+btnLogout.addEventListener('click', async () => {
+  await logout();
+  localStorage.removeItem('user');
+});
 
 getDoseOptions.forEach((dose) => {
   dose.addEventListener('change', () => {

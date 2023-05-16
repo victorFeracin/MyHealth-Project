@@ -1,4 +1,4 @@
-import { getVaccineById, updateVaccine, deleteVaccine } from "./services.js";
+import { logout, getVaccineById, updateVaccine, deleteVaccine } from "./services.js";
 
 
 const getDataVacina = document.getElementById('input-data-vacina');
@@ -8,6 +8,7 @@ const getImgUrl = document.getElementById('img-vacina');
 const getNextVacina = document.getElementById('input-next-vacina');
 let getDose = "";
 
+const btnLogout = document.getElementById('btn-logout');
 const getImgContainer = document.querySelector('.img-comprovante');
 let loadedImg = document.createElement('img');
 const btnRemoveVacina = document.getElementById('btn-remove-vacina-confirm');
@@ -34,6 +35,11 @@ window.onload = async () => {
     getNextVacina.disabled = true;
   }
 }
+
+btnLogout.addEventListener('click', async () => {
+  await logout();
+  localStorage.removeItem('user');
+});
 
 getDoseOptions.forEach((dose) => {
   dose.addEventListener('change', () => {
