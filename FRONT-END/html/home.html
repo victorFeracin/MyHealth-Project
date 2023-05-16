@@ -7,92 +7,57 @@
   <link rel="shortcut icon" href="../img/favicon.ico">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <title>MyHealth - Home</title>
 </head>
 <body>
-  <!--HEADER-->
-  <header>
-    <nav id="header-logo">
-      <a href="index.html">
-        <img src="../img/vaccineicon.png" alt="MyHealth">
-        <span>MyHealth</span>
-      </a>
-    </nav>
-    <nav id="header-menu">
-      <ul>
-        <li><a href="home.html">Minhas vacinas</a></li>
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-  <!--HEADER END-->
 
-  <main id="main-home">
-    <section class="home-container">
+  <div id="loading-screen">
+    <img src="../img/loading-gif.gif" alt="Loading">
+    <h2>Carregando...</h2>
+  </div>
 
-      <form id="search-container">
-        <button id="button-search">
-          <img src="../img/search-icon.png" alt="Ícone de Pesquisa">
-        </button>
-        <input type="search" placeholder="PESQUISAR VACINA..." id="input-search"></input>
-      </form>
-
-      <section id="home-card-container">
-
-        <a href="#" class="card-item">
-          <h1 class="card-title">Covid-19</h1>
-          <div class="card-dose-info-container">
-            <h3 class="card-dose-info">Dose única</h3>
-          </div>
-          <span class="card-date">11/06/2022</span>
-          <img src="../img/vaccine-bottle-example.jpg" alt="Vacina Covid-19" class="card-img">
-          <span class="card-next-dose-info">Não há proxima dose</span>
+  <div id="authorized-content">
+    <!--HEADER-->
+    <header>
+      <nav id="header-logo">
+        <a href="index.html">
+          <img src="../img/vaccineicon.png" alt="MyHealth">
+          <span>MyHealth</span>
         </a>
+      </nav>
+      <nav id="header-menu">
+        <ul>
+          <li><a href="home.html">Minhas vacinas</a></li>
+          <li><button id="btn-logout">Logout</button></li>
+        </ul>
+      </nav>
+    </header>
+    <!--HEADER END-->
+  
+    <main id="main-home">
+      <section class="home-container">
+  
+        <form id="search-container">
+          <button id="button-search" type="submit">
+            <img src="../img/search-icon.png" alt="Ícone de Pesquisa">
+          </button>
+          <input type="search" placeholder="PESQUISAR VACINA..." id="input-search" required></input>
+        </form>
 
-        <a href="#" class="card-item">
-          <h1 class="card-title">Covid-19</h1>
-          <div class="card-dose-info-container">
-            <h3 class="card-dose-info">Dose única</h3>
-          </div>
-          <span class="card-date">11/06/2022</span>
-          <img src="../img/vaccine-bottle-example.jpg" alt="Vacina Covid-19" class="card-img">
-          <span class="card-next-dose-info">Não há proxima dose</span>
-        </a>
-
-        <a href="#" class="card-item">
-          <h1 class="card-title">Covid-19</h1>
-          <div class="card-dose-info-container">
-            <h3 class="card-dose-info">Dose única</h3>
-          </div>
-          <span class="card-date">11/06/2022</span>
-          <img src="../img/vaccine-bottle-example.jpg" alt="Vacina Covid-19" class="card-img">
-          <span class="card-next-dose-info">Não há proxima dose</span>
-        </a>
-
-        <a href="#" class="card-item">
-          <h1 class="card-title">Covid-19</h1>
-          <div class="card-dose-info-container">
-            <h3 class="card-dose-info">Dose única</h3>
-          </div>
-          <span class="card-date">11/06/2022</span>
-          <img src="../img/vaccine-bottle-example.jpg" alt="Vacina Covid-19" class="card-img">
-          <span class="card-next-dose-info">Não há proxima dose</span>
-        </a>
-
-        <a href="#" class="card-item">
-          <h1 class="card-title">Covid-19</h1>
-          <div class="card-dose-info-container">
-            <h3 class="card-dose-info">Dose única</h3>
-          </div>
-          <span class="card-date">11/06/2022</span>
-          <img src="../img/vaccine-bottle-example.jpg" alt="Vacina Covid-19" class="card-img">
-          <span class="card-next-dose-info">Não há proxima dose</span>
-        </a>
-
+        <section id="home-card-container">
+  
+          <!--Vaccine cards-->
+  
+        </section>
+  
+        <a href="nova-vacina.html" id="home-btn-container">Nova vacina</a>
       </section>
-
-      <a href="nova-vacina.html" id="home-btn-container">Nova vacina</a>
-    </section>
-  </main>
+    </main>
+  </div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script type="module" src="../js/services.js"></script>
+  <script type="module" src='../js/authentication.js'></script>
+  <script type="module" src='../js/home.js' defer></script>
 </body>
 </html>

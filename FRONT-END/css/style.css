@@ -33,25 +33,24 @@ header {
 }
 
 #header-menu ul li {
-  background-color: #419ED7;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   transition: .3s;
 }
 
-#header-menu ul li:hover {
-  background-color: #FFF;
-}
-
-#header-menu ul li a {
+#header-menu ul li a, #btn-logout {
   display: block;
   color: #fff;
   font-size: 1rem;
   padding: 9px 16px;
   transition: .3s;
+  background-color: #2f87bd;
+  cursor: pointer;
+  border: none;
 }
 
-#header-menu ul li a:hover {
+#header-menu ul li a:hover, #btn-logout:hover {
   color: #419ED7;
+  background-color: #fff;
 }
 
 /* INDEX */
@@ -125,6 +124,7 @@ main {
   font-size: 1rem;
   outline: 0;
   font-family: "Averia Libre", "sans-serif";
+  color: #3F92C5;
 }
 
 #button-search {
@@ -148,8 +148,9 @@ main {
 }
 
 #home-card-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 40px;
 }
@@ -190,7 +191,8 @@ main {
 }
 
 .card-img {
-  max-width: 100%;
+  width: 340px;
+  height: 191.23px;
 }
 
 .card-next-dose-info {
@@ -222,7 +224,7 @@ main {
   background: #ADD5D0;
 }
 
-#form-nova-vacina, #form-criar-conta {
+#form-nova-vacina, #form-criar-conta, #form-editar-vacina {
   color: #fff;
   font-size: 1.5rem;
   display: flex;
@@ -285,8 +287,13 @@ input[type='file'] {
   gap: 10px;
 }
 
+.img-comprovante {
+  margin: 0 auto;
+}
+
 .img-comprovante img {
-  max-width: 100%;
+  width: 340px;
+  max-height: 191.23px;
 }
 
 #btn-form-vacina {
@@ -463,6 +470,7 @@ input[type='file'] {
 }
 
 .label-first-lvl-entrar {
+  min-width: 65px;
   color: #fff;
   font-size: 1.5rem;
 }
@@ -539,6 +547,7 @@ input[type='file'] {
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-top: 40px;
 }
 
 #btn-form-redefinir {
@@ -558,54 +567,28 @@ input[type='file'] {
   color: #37BD6D;
 }
 
-/* #form-nova-vacina-labels, #form-nova-vacina-inputs {
+/*LOADING SCREEN*/
+#authorized-content {
+  display: block;
+}
+#loading-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: #8FE1D9;
+  color:#2f87bd;
+  font-size: 1.5rem;
 }
 
-#form-nova-vacina-labels {
-  width: 28.5%;
-  text-align: right;
-  margin-right: 3%;
+#loading-screen img {
+  width: 80px;
+  height: 80px;
 }
-
-#form-nova-vacina-labels label {
-  font-size: 25px;
-}
-
-#form-nova-vacina-inputs {
-  width: 68.5%;
-}
-
-#form-nova-vacina-inputs input {
-  padding: 10px 15px;
-  border: none;
-  outline: 0;
-  font-size: 1rem;
-  font-family: "Averia Libre", "sans-serif";
-  color: #3F92C5;
-}
-
-.input-first-lvl {
-  height: 35px;
-}
-
-#btn-form-vacina {
-  margin-top: 50px;
-  align-self: center;
-} */
-
-/* MEDIA QUERIES */
-/* @media screen and (max-width: 1421px) {
-  #home-card-container {
-    justify-content: flex-start;
-    gap: 8%;
-    
-  }
-
-  .card-item {
-    max-width: 400px;
-    height: auto;
-  }
-} */

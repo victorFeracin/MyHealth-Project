@@ -12,32 +12,32 @@ const Form = document.getElementById('form-criar-conta');
 
 const constraints = {
   "nome-completo": {
-    presence: { allowEmpty: false, message: 'Campo obrigatório' },
+    presence: { allowEmpty: false, message: 'Nome obrigatório' },
     length: {
       minimum: 2,
-      message: "Deve ter no mínimo 2 caracteres",
-    },
+      message: "Nome deve ter no mínimo 2 caracteres",
+    }
   },
   "data-nascimento": {
-    presence: { allowEmpty: false, message: 'Campo obrigatório' },
+    presence: { allowEmpty: false, message: 'Data de nascimento obrigatória' }
   },
   "email": {
-    presence: { allowEmpty: false, message: 'Campo obrigatório' },
-    email: { message: 'Email inválido' },
+    presence: { allowEmpty: false, message: 'Email obrigatório' },
+    email: { message: 'Email inválido' }
   },
   "senha": {
-    presence: { allowEmpty: false, message: 'Campo obrigatório' },
+    presence: { allowEmpty: false, message: 'Senha obrigatória' },
     length: {
       minimum: 6,
-      message: "Deve ter no mínimo 6 caracteres",
-    },
+      message: "Senha ter no mínimo 6 caracteres",
+    }
   },
   "repetir-senha": {
-    presence: { allowEmpty: false, message: 'Campo obrigatório' },
+    presence: { allowEmpty: false, message: 'Confirme a senha' },
     equality: {
-      attribute: 'password',
-      message: 'As senhas devem ser iguais',
-    },
+      attribute: 'senha',
+      message: 'Senha não confere!',
+    }
   }
 }
 
@@ -69,16 +69,14 @@ const validateForm = () => {
         },
 
       }).showToast();
-    }
-
-    
+    } 
     return false;
   }
   return true;
 }
 
 
-Form.onsubmit = async (event) => {
+Form.addEventListener('submit', async (event) => {
   event.preventDefault();
   try {
     if (validateForm()) {
@@ -87,10 +85,10 @@ Form.onsubmit = async (event) => {
           getSexo = s.value;
         }
       });
-      await createUser(getEmail.value, getPassword.value, getFullName.value, getSexo, getDataNasc.value);
-      console.log('Usuário criado com sucesso!');
+      const userData = JSON.stringify(await createUser(getEmail.value, getPassword.value, getFullName.value, getSexo, getDataNasc.value));
+      localStorage.setItem('user', userData);
     }
   } catch (error) {
     console.log(`Error: ${error}`);
   }
-}
+});

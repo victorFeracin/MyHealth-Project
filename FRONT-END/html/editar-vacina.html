@@ -7,111 +7,126 @@
   <link rel="shortcut icon" href="../img/favicon.ico">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <title>MyHealth - Editar Vacina</title>
 </head>
 <body>
-  <!--HEADER-->
-  <header>
-    <nav id="header-logo">
-      <a href="index.html">
-        <img src="../img/vaccineicon.png" alt="MyHealth">
-        <span>MyHealth</span>
-      </a>
-    </nav>
-    <nav id="header-menu">
-      <ul>
-        <li><a href="home.html">Minhas vacinas</a></li>
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-  <!--HEADER END-->
 
-  <main id="main-nova-vacina">
+  <div id="loading-screen">
+    <img src="../img/loading-gif.gif" alt="Loading">
+    <h2>Carregando...</h2>
+  </div>
 
-    <div id="btn-remove-vacina-container">
-      <button id="btn-remove-vacina" onclick="openPopUp()">
-        <img src="../img/trash-icon.png" alt="Remover vacina">
-        Excluir
-      </button>
-    </div>
-    
+  <div id="authorized-content">
+    <!--HEADER-->
+    <header>
+      <nav id="header-logo">
+        <a href="index.html">
+          <img src="../img/vaccineicon.png" alt="MyHealth">
+          <span>MyHealth</span>
+        </a>
+      </nav>
+      <nav id="header-menu">
+        <ul>
+          <li><a href="home.html">Minhas vacinas</a></li>
+          <li><a id="btn-logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!--HEADER END-->
 
-    <section class="nova-vacina-container">
-      <form id="form-nova-vacina">
-        
-        <div class="form-row">
-          <label for="input-data-vacina" class="label-first-lvl">Data de vacinação</label>
-          <input type="date" id="input-data-vacina" class="input-first-lvl input-first-lvl-field" name="data-vacina">
-        </div>
-        
-        <div class="form-row">
-          <label for="input-nome-vacina" class="label-first-lvl">Vacina</label>
-          <input type="text" id="input-nome-vacina" class="input-first-lvl input-first-lvl-field" name="nome-vacina">
-        </div>
-        
-        <div class="form-row">
-          <label for="input-dose-vacina" class="label-first-lvl">Dose</label>
-          <div>
-            <label>  
-              <input type="radio" name="dose-vacina" id="input-1a-dose" value="1a. dose" checked>
-              1a. dose
-            </label>
-            <label>  
-              <input type="radio" name="dose-vacina" id="input-2a-dose" value="2a. dose">
-              2a. dose
-            </label>
-            <label>  
-              <input type="radio" name="dose-vacina" id="input-3a-dose" value="3a. dose">
-              3a. dose
-            </label>
-            <label>  
-              <input type="radio" name="dose-vacina" id="input-reforco" value="Reforço">
-              Reforço
-            </label>
-            <label>  
-              <input type="radio" name="dose-vacina" id="input-dose-unica" value="Dose única">
-              Dose única
-            </label>
+    <main id="main-nova-vacina">
+
+      <div id="btn-remove-vacina-container">
+        <button id="btn-remove-vacina" onclick="openPopUp()">
+          <img src="../img/trash-icon.png" alt="Remover vacina">
+          Excluir
+        </button>
+      </div>
+
+
+      <section class="nova-vacina-container">
+        <form id="form-editar-vacina">
+
+          <div class="form-row">
+            <label for="input-data-vacina" class="label-first-lvl">Data de vacinação</label>
+            <input type="date" id="input-data-vacina" class="input-first-lvl input-first-lvl-field" name="data-vacina">
           </div>
-        </div>
-        
 
-        <div class="form-row form-comprovante">
-          <label for="img-vacina" class="label-first-lvl">Comprovante da vacina</label>
-          <div class="comprovante-container">
-            <label for="img-vacina" class="btn-input">
-              Selecionar imagem...
-              <input type="file" id="img-vacina" class="input-first-lvl" name="img-vacina">
-            </label>
-            <div class="img-comprovante">
-              <img src="../img/vaccine-bg.jpg" alt="Comprovante" class="">
+          <div class="form-row">
+            <label for="input-nome-vacina" class="label-first-lvl">Vacina</label>
+            <input type="text" id="input-nome-vacina" class="input-first-lvl input-first-lvl-field" name="nome-vacina">
+          </div>
+
+          <div class="form-row">
+            <label for="input-dose-vacina" class="label-first-lvl">Dose</label>
+            <div>
+              <label>  
+                <input type="radio" name="dose-vacina" id="input-1a-dose" value="1a. dose" checked>
+                1a. dose
+              </label>
+              <label>  
+                <input type="radio" name="dose-vacina" id="input-2a-dose" value="2a. dose">
+                2a. dose
+              </label>
+              <label>  
+                <input type="radio" name="dose-vacina" id="input-3a-dose" value="3a. dose">
+                3a. dose
+              </label>
+              <label>  
+                <input type="radio" name="dose-vacina" id="input-reforco" value="Reforço">
+                Reforço
+              </label>
+              <label>  
+                <input type="radio" name="dose-vacina" id="input-dose-unica" value="Dose única">
+                Dose única
+              </label>
             </div>
           </div>
-        </div>
 
-        <div class="form-row">
-          <label for="input-next-vacina" class="label-first-lvl">Próxima vacinação</label>
-          <input type="date" id="input-next-vacina" class="input-first-lvl input-first-lvl-field" name="next-vacina">
-        </div>
-        
-        <button type="submit" id="btn-form-vacina">Salvar Alterações</button>
-        
-      </form>
-    </section>
-  </main>
 
-  <!--PopUp-->
-  <div id="remove-vacina-popup-container">
-    <div id="remove-vacina-popup-content">
-      <p>Tem certeza que deseja remover esta vacina?</p>
-      <div id="remove-vacina-popup-btns-container">
-        <button id="btn-remove-vacina-confirm" onclick="deleteVacina()">sim</button>
-        <button id="btn-remove-vacina-cancel" onclick="closePopUp()">cancelar</button>
+          <div class="form-row form-comprovante">
+            <label for="img-vacina" class="label-first-lvl" id="label-comprovante">Comprovante da vacina</label>
+            <div class="comprovante-container">
+              <label for="img-vacina" class="btn-input">
+                Selecionar imagem...
+                <input type="file" id="img-vacina" class="input-first-lvl" name="comprovante-vacina">
+              </label>
+              <div class="img-comprovante">
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="input-next-vacina" class="label-first-lvl">Próxima vacinação</label>
+            <input type="date" id="input-next-vacina" class="input-first-lvl input-first-lvl-field" name="next-vacina">
+          </div>
+
+          <button type="submit" id="btn-form-vacina">Salvar Alterações</button>
+
+        </form>
+      </section>
+    </main>
+
+    <!--PopUp-->
+    <div id="remove-vacina-popup-container">
+      <div id="remove-vacina-popup-content">
+        <p>Tem certeza que deseja remover esta vacina?</p>
+        <div id="remove-vacina-popup-btns-container">
+          <button id="btn-remove-vacina-confirm" onclick="deleteVacina()">sim</button>
+          <button id="btn-remove-vacina-cancel" onclick="closePopUp()">cancelar</button>
+        </div>
       </div>
     </div>
   </div>
+  
   <!--PopUp END-->
-  <script src="../js/script.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+  <script type="module" src="../js/services.js"></script>
+  <script type="module" src="../js/editar-vacina.js" defer></script>
+  <script src="../js/popup.js"></script>
+  <script type="module" src='../js/authentication.js'></script>
 </body>
 </html>
