@@ -8,7 +8,3 @@ const openPopUp = () => {
 const closePopUp = () => {
   popUpContainer.style.display = 'none';
 }
-
-const deleteVacina = () => {
-  closePopUp();
-}

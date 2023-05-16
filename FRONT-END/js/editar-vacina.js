@@ -1,4 +1,4 @@
-import { getVaccineById, updateVaccine } from "./services.js";
+import { getVaccineById, updateVaccine, deleteVaccine } from "./services.js";
 
 
 const getDataVacina = document.getElementById('input-data-vacina');
@@ -9,9 +9,10 @@ const getNextVacina = document.getElementById('input-next-vacina');
 let getDose = "";
 
 const getImgContainer = document.querySelector('.img-comprovante');
-
-const Form = document.getElementById('form-editar-vacina');
 let loadedImg = document.createElement('img');
+const btnRemoveVacina = document.getElementById('btn-remove-vacina-confirm');
+const Form = document.getElementById('form-editar-vacina');
+
 
 window.onload = async () => {
   let user = JSON.parse(localStorage.getItem('user'));
@@ -163,6 +164,16 @@ Form.addEventListener('submit', async (event) => {
       
       await updateVaccine((window.location.href).substring((window.location.href).indexOf('#') + 1), vaccine);
     }
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+});
+
+btnRemoveVacina.addEventListener('click', async () => {
+  try {
+    let user = JSON.parse(localStorage.getItem('user'));
+    await deleteVaccine(user.uid, (window.location.href).substring((window.location.href).indexOf('#') + 1));
+    closePopUp();
   } catch (error) {
     console.log(`Error: ${error}`);
   }

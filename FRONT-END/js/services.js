@@ -1,6 +1,6 @@
 import { app } from "./firebase-config.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, collection, getDocs, addDoc, query, where, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, query, where, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js"
 
 const auth = getAuth(app);
@@ -326,6 +326,56 @@ export const updateVaccine = async (vaccineId, vaccineData) => {
     }).showToast();
   }
 }
+
+export const deleteVaccine = async (userUid, vaccineId) => {
+  try {
+    const vaccinesCol = collection(db, 'vaccines');
+    const vaccinesSnapshot = await getDocs(query(vaccinesCol, where('user_uid', '==', userUid)));
+    const vaccine = {
+      id: '',
+      data: {},
+    };
+    vaccinesSnapshot.docs.map((doc) => {
+      if(doc.id === vaccineId) {
+        vaccine.id = doc.id;
+        vaccine.data = doc.data();
+        return { id: vaccine.id, data: vaccine.data };
+      }
+    });
+    await deleteDoc(doc(db, 'vaccines', vaccine.id));
+    Toastify({
+      text: "Vacina deletada com sucesso!",
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #06d455, #4bd17e)",
+        fontFamily: ("Averia Libre", "sans-serif"),
+      },
+  
+    }).showToast();
+    setTimeout(() => {
+      window.location.href = "./home.html"
+    }, 2000);
+  } catch (error) {
+    const errorMessage = translateError(error.code);
+    Toastify({
+      text: `Erro: ${errorMessage}`,
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #c60b0b, #cd3544)",
+        fontFamily: ("Averia Libre", "sans-serif"),
+      },
+
+    }).showToast();
+  }
+};
 
 /*Exceptions*/
 const translateError = (error) => {
