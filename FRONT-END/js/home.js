@@ -77,7 +77,7 @@ Form.addEventListener('submit', async (event) => {
         },
 
       }).showToast()
-      
+      cardContainer.innerHTML = "";
       loadVaccines(user);
   }
   } catch (error) {
