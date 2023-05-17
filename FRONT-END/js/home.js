@@ -12,9 +12,7 @@ btnLogout.addEventListener('click', async () => {
 });
 
 
-window.onload = async () => {
-
-  let user = JSON.parse(localStorage.getItem('user'));
+const loadVaccines = async (user) => {
   const vaccines = await getVaccines(user.uid);
 
   if(vaccines.length > 0) {
@@ -25,14 +23,22 @@ window.onload = async () => {
           <div class="card-dose-info-container">
             <h3 class="card-dose-info">${(vaccine?.data?.vaccine_dose)}</h3>
           </div>
-          <span class="card-date">${(vaccine?.data?.vaccine_date).split('-').reverse().join('/')}</span>
+          <span class="card-date">${(vaccine?.data?.vaccine_date)?.split('-').reverse().join('/')}</span>
           <img src="${vaccine?.data?.vaccine_img}" alt="Comprovante" class="card-img">
-          <span class="card-next-dose-info">${(vaccine?.data?.vaccine_next_dose != "" ? `Próxima dose em: ${(vaccine?.data?.vaccine_next_dose).split('-').reverse().join('/')}` : "Não há próxima dose")}</span>
+          <span class="card-next-dose-info">${(vaccine?.data?.vaccine_next_dose != "" ? `Próxima dose em: ${(vaccine?.data?.vaccine_next_dose)?.split('-').reverse().join('/')}` : "Não há próxima dose")}</span>
         </a>
       `;
-    });
-    
+    }); 
+  } else {
+    cardContainer.innerHTML += `
+        <h1>Nenhuma vacina cadastrada</h1>
+    `;
   }
+};
+
+window.onload = async () => {
+  let user = JSON.parse(localStorage.getItem('user'));
+  loadVaccines(user);
 }
 
 
@@ -41,27 +47,26 @@ Form.addEventListener('submit', async (event) => {
   try {
     let user = JSON.parse(localStorage.getItem('user'));
     const search = await getVaccinesByTherm(user.uid, getSearch.value);
-    console.log(getSearch.value);
-
+    console.log(search.length);
     if(search.length > 0) {
       cardContainer.innerHTML = "";
       search.map((vaccine) => {
         cardContainer.innerHTML += `
-        <a href="editar-vacina.html#${vaccine?.id}" class="card-item">
-          <h1 class="card-title">${vaccine?.data?.vaccine_name}</h1>
-          <div class="card-dose-info-container">
-            <h3 class="card-dose-info">${(vaccine?.data?.vaccine_dose)}</h3>
-          </div>
-          <span class="card-date">${(vaccine?.data?.vaccine_date).split('-').reverse().join('/')}</span>
-          <img src="${vaccine?.data?.vaccine_img}" alt="Comprovante" class="card-img">
-          <span class="card-next-dose-info">${(vaccine?.data?.vaccine_next_dose != "" ? `Próxima dose em: ${(vaccine?.data?.vaccine_next_dose).split('-').reverse().join('/')}` : "Não há próxima dose")}</span>
-        </a>
-      `;
+          <a href="editar-vacina.html#${vaccine?.id}" class="card-item">
+            <h1 class="card-title">${vaccine?.data?.vaccine_name}</h1>
+            <div class="card-dose-info-container">
+              <h3 class="card-dose-info">${(vaccine?.data?.vaccine_dose)}</h3>
+            </div>
+            <span class="card-date">${(vaccine?.data?.vaccine_date)?.split('-').reverse().join('/')}</span>
+            <img src="${vaccine?.data?.vaccine_img}" alt="Comprovante" class="card-img">
+            <span class="card-next-dose-info">${(vaccine?.data?.vaccine_next_dose != "" ? `Próxima dose em: ${(vaccine?.data?.vaccine_next_dose)?.split('-').reverse().join('/')}` : "Não há próxima dose")}</span>
+          </a>
+        `;
       });
-    } else {
-      Toastify({
+    } else if (search.length == 0) {
+      await Toastify({
         text: "Nenhuma vacina encontrada.",
-        duration: 3000,
+        duration: 4000,
         close: true,
         gravity: "bottom",
         position: "right",
@@ -72,7 +77,9 @@ Form.addEventListener('submit', async (event) => {
         },
 
       }).showToast()
-    }
+      
+      loadVaccines(user);
+  }
   } catch (error) {
     console.log(`Error: ${error}`);
   }

@@ -219,17 +219,18 @@ export const getVaccines = async (userUid) => {
 export const getVaccinesByTherm = async (userUid, vaccineTherm) => {
   try {
     const vaccinesCol = collection(db, 'vaccines');
-    const vaccinesSnapshot = await getDocs(query(
-      vaccinesCol, 
-      where('user_uid', '==', userUid), 
-      where('vaccine_name', '==', vaccineTherm)
-    ));
+    const vaccinesSnapshot = await getDocs(query(vaccinesCol, where('user_uid', '==', userUid)));
     const vaccinesList = vaccinesSnapshot.docs.map((doc) => {
-      const docId = doc.id;
-      const docData = doc.data();
-      return { id: docId, data: docData };
+      if(doc.data().vaccine_name.toLowerCase().includes(vaccineTherm.toLowerCase())) {
+        const docId = doc.id;
+        const docData = doc.data();
+        return { id: docId, data: docData };
+      } 
     });
-    return vaccinesList;
+    const newList = vaccinesList.filter((item) => {
+      return item != undefined;
+    });
+    return newList;
   } catch (error) {
     const errorMessage = translateError(error.code);
     Toastify({
