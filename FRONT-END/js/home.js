@@ -1,10 +1,10 @@
-import { logout, getVaccines, getVaccinesByTherm } from "./services.js";
+import { logout, getVaccines } from "./services.js";
 
 const btnLogout = document.getElementById('btn-logout');
 const cardContainer = document.getElementById('home-card-container');
 const getSearch = document.getElementById('input-search');
 
-const Form = document.getElementById('search-container');
+let vaccines = [];
 
 btnLogout.addEventListener('click', async () => {
   await logout();
@@ -13,7 +13,7 @@ btnLogout.addEventListener('click', async () => {
 
 
 const loadVaccines = async (user) => {
-  const vaccines = await getVaccines(user.uid);
+  vaccines = await getVaccines(user.uid);
 
   if(vaccines.length > 0) {
     vaccines.map((vaccine) => {
@@ -31,7 +31,7 @@ const loadVaccines = async (user) => {
     }); 
   } else {
     cardContainer.innerHTML += `
-        <h1>Nenhuma vacina cadastrada</h1>
+        <h1 style="color:#2f87bd; margin:0 auto; font-size: 2rem">Nenhuma vacina cadastrada</h1>
     `;
   }
 };
@@ -42,11 +42,11 @@ window.onload = async () => {
 }
 
 
-Form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  try {
-    let user = JSON.parse(localStorage.getItem('user'));
-    const search = await getVaccinesByTherm(user.uid, getSearch.value);
+getSearch.addEventListener('keyup', async () => {
+    try {
+    const search = vaccines.filter((vaccine) => {
+      return vaccine.data.vaccine_name.toLowerCase().includes(getSearch.value.toLowerCase());
+    });
     console.log(search.length);
     if(search.length > 0) {
       cardContainer.innerHTML = "";

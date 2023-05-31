@@ -216,39 +216,6 @@ export const getVaccines = async (userUid) => {
   } 
 }
 
-export const getVaccinesByTherm = async (userUid, vaccineTherm) => {
-  try {
-    const vaccinesCol = collection(db, 'vaccines');
-    const vaccinesSnapshot = await getDocs(query(vaccinesCol, where('user_uid', '==', userUid)));
-    const vaccinesList = vaccinesSnapshot.docs.map((doc) => {
-      if(doc.data().vaccine_name.toLowerCase().includes(vaccineTherm.toLowerCase())) {
-        const docId = doc.id;
-        const docData = doc.data();
-        return { id: docId, data: docData };
-      } 
-    });
-    const newList = vaccinesList.filter((item) => {
-      return item != undefined;
-    });
-    return newList;
-  } catch (error) {
-    const errorMessage = translateError(error.code);
-    Toastify({
-      text: `Erro: ${errorMessage}`,
-      duration: 3000,
-      close: true,
-      gravity: "bottom",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "linear-gradient(to right, #c60b0b, #cd3544)",
-        fontFamily: ("Averia Libre", "sans-serif"),
-      },
-
-    }).showToast();
-  }
-}
-
 export const getVaccineById = async (userUid, vaccineId) => {
   try {
     const vaccinesCol = collection(db, 'vaccines');
