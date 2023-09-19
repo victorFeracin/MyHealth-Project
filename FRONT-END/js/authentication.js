@@ -1,5 +1,5 @@
 import { app } from "./firebase-config.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
 
 const loading = document.getElementById('loading-screen');
 const authorizedContent = document.getElementById('authorized-content');

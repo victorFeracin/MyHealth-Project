@@ -131,6 +131,3 @@ Form.addEventListener('submit', async (event) => {
     console.log(`Error: ${error}`);
   }
 });
-
-
-
