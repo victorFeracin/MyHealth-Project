@@ -310,7 +310,7 @@ export const deleteVaccine = async (userUid, vaccineId) => {
         return { id: vaccine.id, data: vaccine.data };
       }
     });
-    await getDoc(doc(db, 'vaccines', vaccine.id));
+    await deleteDoc(doc(db, 'vaccines', vaccine.id));
     Toastify({
       text: "Vacina deletada com sucesso!",
       duration: 3000,
