@@ -14,6 +14,14 @@ let loadedImg = document.createElement('img');
 const btnRemoveVacina = document.getElementById('btn-remove-vacina-confirm');
 const Form = document.getElementById('form-editar-vacina');
 
+validate.extend(validate.validators.datetime, {
+  parse: function (value) {
+    return new Date(value);
+  },
+  format: function (value) {
+    return value.toISOString();
+  },
+});
 
 window.onload = async () => {
   let user = JSON.parse(localStorage.getItem('user'));
@@ -82,9 +90,16 @@ getImgUrl.addEventListener('change', (event) => {
   }
 });
 
+let currentDate = new Date();
+currentDate.setDate(currentDate.getDate() - 1);
+
 const constraints = {
   "data-vacina": {
     presence: { allowEmpty: false, message: 'Data de vacina obrigatória' },
+    datetime: {
+      earliest: currentDate,
+      message: 'não pode ser menor que a data atual',
+    },
   },
   "nome-vacina": {
     presence: { allowEmpty: false, message: 'Nome de vacina obrigatório' },
@@ -167,8 +182,23 @@ Form.addEventListener('submit', async (event) => {
           vaccine_next_dose: getNextVacina.value,
         }
       }
-      
-      await updateVaccine((window.location.href).substring((window.location.href).indexOf('#') + 1), vaccine);
+      if(getNextVacina.value >= getDataVacina.value) {
+        await updateVaccine((window.location.href).substring((window.location.href).indexOf('#') + 1), vaccine);
+      } else {
+        Toastify({
+          text: 'Data da próxima vacina não pode ser anterior à data da vacinação',
+          duration: 3000,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "linear-gradient(to right, #c60b0b, #cd3544)",
+            fontFamily: ("Averia Libre", "sans-serif"),
+          },
+  
+        }).showToast()
+      }
     }
   } catch (error) {
     console.log(`Error: ${error}`);
