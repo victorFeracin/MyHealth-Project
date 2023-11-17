@@ -593,6 +593,21 @@ input[type='file'] {
   height: 80px;
 }
 
+#btn-voltar {
+  background-color: #2f87bd;
+  color: #fff;
+  border: none;
+  width: 180px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  padding: 7px 10px;
+  cursor: pointer;
+  margin: 40px auto 0 auto;
+  transition: .3s;
+  font-size: 1rem;
+  float: ileft;
+  margin-bottom: 30px;
+}
+
 /*MEDIA*/
 @media screen and (max-width: 440px) {
   header {
@@ -644,6 +659,8 @@ input[type='file'] {
     display: flex;
     justify-content: center;
   }
+
+
 
   .form-row-entrar {
     flex-direction: row;
