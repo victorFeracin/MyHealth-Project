@@ -8,3 +8,14 @@ const openPopUp = () => {
 const closePopUp = () => {
   popUpContainer.style.display = 'none';
 }
+
+/*POPUP-USER*/
+const popUpContainerUser = document.getElementById('remove-usuario-popup-container');
+
+const openPopUpUser = () => {
+  popUpContainerUser.style.display = 'block';
+}
+
+const closePopUpUser = () => {
+  popUpContainerUser.style.display = 'none';
+}

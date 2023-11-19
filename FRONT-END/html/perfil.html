@@ -24,6 +24,7 @@
 
   <main id="main-criar-conta">
     <section class="criar-conta-container">
+
       <form id="form-criar-conta">
 
         <div class="form-row-criar">
@@ -55,14 +56,31 @@
           <input type="email" id="input-email" class="input-first-lvl-criar input-first-lvl-field" name="email" required>
         </div>
         
-        <button type="submit" id="btn-form-criar">Salvar  </button>
-        
-      </form>   
+        <div>
+          <button type="submit" id="btn-form-criar">Salvar  </button>
+        </div>
+      </form> 
+
+      <div>
+        <button id="btn-remove-usuario" onclick="openPopUpUser()">Excluir Conta  </button>
+      </div> 
+
+      <!--PopUpUser-->
+      <div id="remove-usuario-popup-container">
+        <div id="remove-usuario-popup-content">
+          <p>Tem certeza que excluir a sua conta?</p>
+          <div id="remove-usuario-popup-btns-container">
+            <button id="btn-remove-usuario-confirm">sim</button>
+            <button id="btn-remove-usuario-cancel" onclick="closePopUpUser()">cancelar</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
   <script type="module" src="../js/services.js"></script>
   <script type="module" src="../js/criar-conta.js"></script>
+  <script src="../js/popup.js"></script>
 </body>
 </html>
