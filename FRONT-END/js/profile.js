@@ -1,4 +1,4 @@
-import { getUser } from './services.js';
+import { getUser, logout, deleteVaccinesAndUser } from './services.js';
 
 const getFullName = document.getElementById('input-nome-completo');
 const getSexoOptions = document.getElementsByName('user-sexo');
@@ -6,6 +6,8 @@ const getDataNasc = document.getElementById('input-data-nascimento');
 const getEmail = document.getElementById('input-email');
 
 const Form = document.getElementById('form-criar-conta');
+
+const btnRemoveUser = document.getElementById('btn-remove-usuario-confirm');
 
 
 window.onload = async () => {
@@ -91,6 +93,16 @@ Form.addEventListener('submit', async (event) => {
       const userData = JSON.stringify(await createUser(getEmail.value, getPassword.value, getFullName.value, getSexo, getDataNasc.value));
       localStorage.setItem('user', userData);
     }
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+});
+
+btnRemoveUser.addEventListener('click', async () => {
+  try {
+    let user = JSON.parse(localStorage.getItem('user'));
+    await deleteVaccinesAndUser(user.uid);
+    closePopUp();
   } catch (error) {
     console.log(`Error: ${error}`);
   }
