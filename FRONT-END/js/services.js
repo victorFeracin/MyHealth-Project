@@ -8,6 +8,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 //Functions
+
 export const createUser = async (email, password, name, sexo, dataNasc) => {
   try {
      const userCreate = await createUserWithEmailAndPassword(auth, email, password);
@@ -187,6 +188,41 @@ export const createVaccine = async (date, name, dose, imgUrl, nextDose, userUid)
     }).showToast();
   }
 }
+
+export const getUser = async (userUid) => {
+  try{
+    const userCollection = collection(db, 'users')
+    const userSnapshot = await getDocs(query(userCollection, where('user_uid', '==', userUid)))
+    const userData = userSnapshot.docs.map((doc) => {
+      const docId = doc.id;
+      const docData = doc.data();
+      return { id: docId, data: docData}
+    })
+    return userData
+  } catch(error) {
+    const errorMessage = translateError(error.code);
+    Toastify({
+      text: `Erro: ${errorMessage}`,
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #c60b0b, #cd3544)",
+        fontFamily: ("Averia Libre", "sans-serif"),
+      },
+
+    }).showToast();
+  }
+  
+  /* 
+  userCollection.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log('Dados do usuário', doc.data() )
+    })
+  })
+*/}
 
 export const getVaccines = async (userUid) => {
   try {
