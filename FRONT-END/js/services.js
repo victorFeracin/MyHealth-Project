@@ -1,6 +1,6 @@
 import { app } from "./firebase-config.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, collection, getDocs, addDoc, query, where, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, deleteUser } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, addDoc, query, where, doc, updateDoc, deleteDoc} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js"
 
 const auth = getAuth(app);
@@ -377,6 +377,62 @@ export const deleteVaccine = async (userUid, vaccineId) => {
         fontFamily: ("Averia Libre", "sans-serif"),
       },
 
+    }).showToast();
+  }
+};
+
+export const deleteVaccinesAndUser = async (userUid) => {
+  try {
+    const vaccinesCol = collection(db, 'vaccines');
+    const vaccinesSnapshot = await getDocs(query(vaccinesCol, where('user_uid', '==', userUid)));
+    const vaccinesList = vaccinesSnapshot.docs.map((doc) => doc.id);
+
+    // Aguarde a exclusão de todas as vacinas
+    await Promise.all(vaccinesList.map((vaccineId) => deleteDoc(doc(db, 'vaccines', vaccineId))));
+
+    const userDocRef = doc(db, 'users', userUid);
+    await deleteDoc(userDocRef);
+
+    // (Opcional) Excluir o usuário do Firebase Authentication
+    // Se o usuário a ser deletado for o atualmente autenticado
+    if (auth.currentUser && auth.currentUser.uid === userUid) {
+      await deleteUser(auth.currentUser);
+    }
+
+    // Verifique se há um usuário autenticado e exclua-o
+    if (auth.currentUser) {
+      await deleteUser(auth.currentUser);
+      Toastify({
+        text: "Usuário deletado com sucesso!",
+        duration: 3000,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #06d455, #4bd17e)",
+          fontFamily: ("Averia Libre", "sans-serif"),
+        },
+      }).showToast();
+      setTimeout(() => {
+        window.location.href = "./index.html";
+      }, 2000);
+    } else {
+      throw new Error('Nenhum usuário autenticado para excluir');
+    }
+  } catch(error) {
+    const errorMessage = translateError(error.code);
+    Toastify({
+      text: `Erro: ${errorMessage}`,
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #c60b0b, #cd3544)",
+        fontFamily: ("Averia Libre", "sans-serif"),
+      },
     }).showToast();
   }
 };
