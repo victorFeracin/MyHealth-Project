@@ -216,13 +216,47 @@ export const getUser = async (userUid) => {
     }).showToast();
   }
   
-  /* 
-  userCollection.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log('Dados do usuário', doc.data() )
-    })
-  })
-*/}
+}
+
+export const updateUser = async (userId, userData) => {
+  const userDataToUpdate = JSON.parse(userData)
+
+  try {
+    await updateDoc(doc(db, 'users', userId), userDataToUpdate);
+    Toastify({
+      text: "Vacina atualizada com sucesso!",
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #06d455, #4bd17e)",
+        fontFamily: ("Averia Libre", "sans-serif"),
+      },
+  
+    }).showToast();
+    setTimeout(() => {
+      window.location.href = "./home.html"
+    }, 2000);
+  } catch (error) {
+    console.log(error)
+    const errorMessage = translateError(error.code);
+    Toastify({
+      text: `Erro: ${errorMessage}`,
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #c60b0b, #cd3544)",
+        fontFamily: ("Averia Libre", "sans-serif"),
+      },
+
+    }).showToast();
+  }
+}
 
 export const getVaccines = async (userUid) => {
   try {
