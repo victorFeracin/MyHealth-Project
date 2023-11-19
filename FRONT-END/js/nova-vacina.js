@@ -9,6 +9,7 @@ let getDose = "";
 
 const btnLogout = document.getElementById('btn-logout');
 const getImgContainer = document.querySelector('.img-comprovante');
+const btnVoltar = document.getElementById('btn-voltar');
 
 const Form = document.getElementById('form-nova-vacina');
 
@@ -24,6 +25,10 @@ validate.extend(validate.validators.datetime, {
 btnLogout.addEventListener('click', async () => {
   await logout();
   localStorage.removeItem('user');
+});
+
+btnVoltar.addEventListener('click', async () => {
+  window.location.replace("home.html");
 });
 
 getDoseOptions.forEach((dose) => {

@@ -13,6 +13,7 @@ const getImgContainer = document.querySelector('.img-comprovante');
 let loadedImg = document.createElement('img');
 const btnRemoveVacina = document.getElementById('btn-remove-vacina-confirm');
 const Form = document.getElementById('form-editar-vacina');
+const btnVoltar = document.getElementById('btn-voltar');
 
 validate.extend(validate.validators.datetime, {
   parse: function (value) {
@@ -43,6 +44,10 @@ window.onload = async () => {
     getNextVacina.disabled = true;
   }
 }
+
+btnVoltar.addEventListener('click', async () => {
+  window.location.replace("home.html");
+});
 
 btnLogout.addEventListener('click', async () => {
   await logout();
