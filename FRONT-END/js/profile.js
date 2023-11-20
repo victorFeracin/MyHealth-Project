@@ -114,7 +114,7 @@ Form.addEventListener('submit', async (event) => {
 btnRemoveUser.addEventListener('click', async () => {
   try {
     let user = JSON.parse(localStorage.getItem('user'));
-    await deleteVaccinesAndUser(user.uid);
+    await deleteVaccinesAndUser(user.uid); //uid do auth passado como parametro
     closePopUp();
   } catch (error) {
     console.log(`Error: ${error}`);

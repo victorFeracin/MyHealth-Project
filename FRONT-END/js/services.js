@@ -445,6 +445,19 @@ export const deleteVaccine = async (userUid, vaccineId) => {
 
 export const deleteVaccinesAndUser = async (userUid) => {
   try {
+    const usersCol = collection(db, 'users');
+    const userSnapshot = await getDocs(query(usersCol, where('user_uid', '==', userUid)));
+      
+    if (!userSnapshot.empty) {
+      const userId = userSnapshot.docs[0].id;
+    
+      // Excluir o usuário da coleção 'users'
+      await deleteDoc(doc(db, 'users', userId));
+    } else {
+      console.log('Usuário não encontrado na coleção "users".');
+    }
+
+
     const vaccinesCol = collection(db, 'vaccines');
     const vaccinesSnapshot = await getDocs(query(vaccinesCol, where('user_uid', '==', userUid)));
     const vaccinesList = vaccinesSnapshot.docs.map((doc) => doc.id);
@@ -452,14 +465,13 @@ export const deleteVaccinesAndUser = async (userUid) => {
     // Aguarde a exclusão de todas as vacinas
     await Promise.all(vaccinesList.map((vaccineId) => deleteDoc(doc(db, 'vaccines', vaccineId))));
 
-    const userDocRef = doc(db, 'users', userUid);
-    await deleteDoc(userDocRef);
-
-    // (Opcional) Excluir o usuário do Firebase Authentication
-    // Se o usuário a ser deletado for o atualmente autenticado
-    if (auth.currentUser && auth.currentUser.uid === userUid) {
-      await deleteUser(auth.currentUser);
-    }
+    // try {
+    //   const usersCol = collection(db, 'users');
+    //   const userSnapshot = await getDocs(query(usersCol, where('user_uid', '==', userUid)));
+    //   await deleteDoc(doc(db, 'vaccines', userSnapshot.id));
+    // } catch(error) {
+    //   console.log(`ERRO NO FIRESTORE: ${error}`);
+    // }
 
     // Verifique se há um usuário autenticado e exclua-o
     if (auth.currentUser) {

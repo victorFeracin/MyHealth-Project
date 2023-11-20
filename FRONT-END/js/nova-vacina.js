@@ -145,23 +145,28 @@ Form.addEventListener('submit', async (event) => {
           getDose = d.value;
         }
       });
-      if(getNextVacina.value >= getDataVacina.value) {
+      if(getNextVacina.value !== "") {
+        if(getNextVacina.value >= getDataVacina.value) {
+          let user = JSON.parse(localStorage.getItem('user'));
+          await createVaccine(getDataVacina.value, getName.value, getDose,getImgUrl.files[0], getNextVacina.value, user.uid);
+        } else {
+          Toastify({
+            text: 'Data da próxima vacina não pode ser anterior à data da vacinação',
+            duration: 3000,
+            close: true,
+            gravity: "bottom",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+              background: "linear-gradient(to right, #c60b0b, #cd3544)",
+              fontFamily: ("Averia Libre", "sans-serif"),
+            },
+    
+          }).showToast()
+        }
+      } else {
         let user = JSON.parse(localStorage.getItem('user'));
         await createVaccine(getDataVacina.value, getName.value, getDose,getImgUrl.files[0], getNextVacina.value, user.uid);
-      } else {
-        Toastify({
-          text: 'Data da próxima vacina não pode ser anterior à data da vacinação',
-          duration: 3000,
-          close: true,
-          gravity: "bottom",
-          position: "right",
-          stopOnFocus: true,
-          style: {
-            background: "linear-gradient(to right, #c60b0b, #cd3544)",
-            fontFamily: ("Averia Libre", "sans-serif"),
-          },
-  
-        }).showToast()
       }
     }
   } catch (error) {
