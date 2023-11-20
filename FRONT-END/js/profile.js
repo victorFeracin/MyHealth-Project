@@ -1,4 +1,4 @@
-import { getUser, logout, deleteVaccinesAndUser } from './services.js';
+import { getUser, logout, deleteVaccinesAndUser, updateUser} from './services.js';
 
 const getFullName = document.getElementById('input-nome-completo');
 const getSexoOptions = document.getElementsByName('user-sexo');
@@ -10,12 +10,15 @@ const Form = document.getElementById('form-criar-conta');
 const btnRemoveUser = document.getElementById('btn-remove-usuario-confirm');
 
 
+let profileId
+
 window.onload = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   //vaccine.data.vaccine_date
   const userData = await getUser(user.uid)
-  console.log(userData[0].data)
+  console.log(userData[0].id)
+  profileId = userData[0].id
   getFullName.value = userData[0].data.user_name
   getDataNasc.value = userData[0].data.user_birth
   getEmail.value = userData[0].data.user_email
@@ -51,8 +54,6 @@ const validateForm = () => {
     "nome-completo": getFullName.value,
     "data-nascimento": getDataNasc.value,
     "email": getEmail.value,
-    "senha": getPassword.value,
-    "repetir-senha": getPasswordConfirm.value,
   }
   
   let errors = validate(fields, constraints);
@@ -83,16 +84,28 @@ const validateForm = () => {
 
 Form.addEventListener('submit', async (event) => {
   event.preventDefault();
+  console.log("Usuário alterado com sucesso")
+  let sexo
   try {
     if (validateForm()) {
       getSexoOptions.forEach((s) => {
         if (s.checked) {
-          getSexo = s.value;
+          sexo = s.value;
         }
-      });
-      const userData = JSON.stringify(await createUser(getEmail.value, getPassword.value, getFullName.value, getSexo, getDataNasc.value));
-      localStorage.setItem('user', userData);
+      });      
     }
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    const userDataOrganized = {
+      user_birth: getDataNasc.value,
+      user_email: getEmail.value,
+      user_name: getFullName.value,
+      user_sex: sexo,
+      user_uid: user.uid,
+    }
+
+    let userDataToUpdate = JSON.stringify(userDataOrganized);
+    await updateUser(profileId, userDataToUpdate)
   } catch (error) {
     console.log(`Error: ${error}`);
   }
