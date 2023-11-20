@@ -1,5 +1,5 @@
 import { app } from "./firebase-config.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, deleteUser } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, deleteUser, updateEmail } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, addDoc, query, where, doc, updateDoc, deleteDoc} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js"
 
@@ -223,22 +223,50 @@ export const updateUser = async (userId, userData) => {
 
   try {
     await updateDoc(doc(db, 'users', userId), userDataToUpdate);
-    Toastify({
-      text: "Vacina atualizada com sucesso!",
-      duration: 3000,
-      close: true,
-      gravity: "bottom",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "linear-gradient(to right, #06d455, #4bd17e)",
-        fontFamily: ("Averia Libre", "sans-serif"),
-      },
-  
-    }).showToast();
-    setTimeout(() => {
-      window.location.href = "./home.html"
-    }, 2000);
+
+    // Verificar se o email está sendo atualizado
+    if (userDataToUpdate.user_email) {
+      // Atualizar email no Firebase Auth
+      const user = auth.currentUser;
+      await updateEmail(user, userDataToUpdate.user_email);
+
+      Toastify({
+        text: "Usuário atualizado com sucesso!",
+        duration: 3000,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #06d455, #4bd17e)",
+          fontFamily: ["Averia Libre", "sans-serif"],
+        },
+      }).showToast();
+
+      // Aguarde um pouco antes de redirecionar para a página inicial
+      setTimeout(() => {
+        window.location.href = "./home.html";
+      }, 2000);
+    } else {
+      // Se o email não estiver sendo atualizado, mostrar apenas o Toast para o Firestore
+      Toastify({
+        text: "Dados do usuário atualizados com sucesso!",
+        duration: 3000,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #06d455, #4bd17e)",
+          fontFamily: ["Averia Libre", "sans-serif"],
+        },
+      }).showToast();
+
+      // Aguarde um pouco antes de redirecionar para a página inicial
+      setTimeout(() => {
+        window.location.href = "./home.html";
+      }, 2000);
+    }
   } catch (error) {
     console.log(error)
     const errorMessage = translateError(error.code);
